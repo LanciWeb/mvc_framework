@@ -1,0 +1,23 @@
+body {
+  margin: 50px 150px;
+  background-color: #00197d;
+}
+
+main {
+  background-color: white;
+  border-radius: 20px;
+  padding: 50px;
+}
+
+figure {
+  margin: 0;
+  width: 50px;
+  text-align: center;
+}
+
+img {
+  height: auto;
+  width: auto;
+  max-height: 40px;
+  max-width: 40px;
+}

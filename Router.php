@@ -11,7 +11,7 @@ class Router
   public $get_routes;
   public $post_routes;
 
-  public function __constructor()
+  public function __construct()
   {
     $this->db = new Database();
   }

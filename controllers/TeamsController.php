@@ -11,8 +11,7 @@ class TeamsController
   {
     if ($_SERVER['REQUEST_METHOD'] !== 'GET') $router->renderView('404');
 
-    //TODO fetch teams
-    $teams = [];
+    $teams = $router->db->getTeams();
 
     $router->renderView('teams/index', ['teams' => $teams]);
   }
