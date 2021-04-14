@@ -29,7 +29,7 @@ class Router
 
   public function resolve()
   {
-    $path = $_SERVER['PATH_METHOD'] ?? "/";
+    $path = $_SERVER['PATH_INFO'] ?? "/";
     $method = $_SERVER['REQUEST_METHOD'];
 
     $fn = $method === 'GET' ? $this->get_routes[$path] : $this->post_routes[$path];

@@ -5,6 +5,7 @@ namespace App\db;
 use PDO;
 use App\db\Config;
 use Exception;
+use App\models\Team;
 
 class Database
 {
@@ -44,6 +45,25 @@ class Database
       $statement->execute();
       $teams = $statement->fetchAll(PDO::FETCH_ASSOC);
       return $teams;
+    } catch (Exception $e) {
+      echo '<pre>';
+      var_dump($e->getMessage());
+      echo '</pre>';
+      exit;
+    }
+  }
+
+  public function createTeam(Team $team)
+  {
+    $statement = $this->pdo->prepare('INSERT INTO teams (name, city, points, goal_diff) VALUES (:name, :city, :points, :goal_diff)');
+
+    $statement->bindValue('name', $team->name);
+    $statement->bindValue('city', $team->city);
+    $statement->bindValue('points', $team->points);
+    $statement->bindValue('goal_diff', $team->goal_diff);
+
+    try {
+      $statement->execute();
     } catch (Exception $e) {
       echo '<pre>';
       var_dump($e->getMessage());
