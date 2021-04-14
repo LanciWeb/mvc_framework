@@ -52,7 +52,11 @@
               <td><?= $teams[$i]['points'] ?></td>
               <td><?= $teams[$i]['goal_diff'] ?></td>
               <td><?= $teams[$i]['city'] ?></td>
-              <td></td>
+              <td>
+                <div class="d-flex justify-content-end">
+                  <a href="/teams/update?id=<?= $teams[$i]['id'] ?>" class="btn btn-primary">Modifica</a>
+                </div>
+              </td>
             </tr>
           <?php endfor; ?>
         </tbody>

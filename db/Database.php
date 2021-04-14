@@ -71,4 +71,43 @@ class Database
       exit;
     }
   }
+
+  public function getTeamById($id)
+  {
+    $statement = $this->pdo->prepare('SELECT * FROM teams WHERE id = :id');
+
+    $statement->bindValue('id', $id);
+
+    try {
+      $statement->execute();
+      $team = $statement->fetch(PDO::FETCH_ASSOC);
+      return $team;
+    } catch (Exception $e) {
+      echo '<pre>';
+      var_dump($e->getMessage());
+      echo '</pre>';
+      exit;
+    }
+  }
+
+  public function updateTeam(Team $team)
+  {
+    $query = 'UPDATE teams SET name=:name, city=:city, points=:points, goal_diff=:goal_diff WHERE id=:id';
+
+    $statement = $this->pdo->prepare($query);
+    $statement->bindValue('id', $team->id);
+    $statement->bindValue('name', $team->name);
+    $statement->bindValue('city', $team->city);
+    $statement->bindValue('points', $team->points);
+    $statement->bindValue('goal_diff', $team->goal_diff);
+
+    try {
+      $statement->execute();
+    } catch (Exception $e) {
+      echo '<pre>';
+      var_dump($e->getMessage());
+      echo '</pre>';
+      exit;
+    }
+  }
 }

@@ -7,7 +7,6 @@ use Exception;
 
 class Team
 {
-
   public $id;
   public $name;
   public $city;
@@ -35,7 +34,8 @@ class Team
 
     if (empty($errors)) {
       try {
-        Database::$db->createTeam($this);
+        if ($this->id) Database::$db->updateTeam($this);
+        else Database::$db->createTeam($this);
       } catch (Exception $e) {
         echo '<pre>';
         var_dump($e->getMessage());

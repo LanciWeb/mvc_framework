@@ -42,6 +42,30 @@ class TeamsController
 
   public function update(Router $router)
   {
+    $errors = [];
+    $id = $_GET['id'];
+    if (!$id) $router->renderView('teams');
+
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+      $team = new Team();
+      $data = $router->db->getTeamById($id);
+      $team->load($data);
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      foreach ($_POST as $key => $value) {
+        $data[$key] = $value;
+      }
+
+      $data['id'] = $id;
+      $team = new Team();
+      $team->load($data);
+      $errors = $team->save();
+
+      if (empty($errors)) header('Location: /teams?success=modificata');
+    }
+
+    $router->renderView('teams/update', ['team' => $team, 'errors' => $errors]);
   }
 
 
