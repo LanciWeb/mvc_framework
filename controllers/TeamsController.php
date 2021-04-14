@@ -11,9 +11,11 @@ class TeamsController
   {
     if ($_SERVER['REQUEST_METHOD'] !== 'GET') $router->renderView('404');
 
-    $teams = $router->db->getTeams();
+    $search = $_GET['search'] ?? null;
 
-    $router->renderView('teams/index', ['teams' => $teams]);
+    $teams = $router->db->getTeams($search);
+
+    $router->renderView('teams/index', ['teams' => $teams, 'search' => $search]);
   }
   public function create(Router $router)
   {

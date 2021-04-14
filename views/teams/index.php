@@ -1,8 +1,15 @@
-<header>
-  <div class="d-flex mb-5">
+<header class="d-flex justify-content-between align-items-center mb-5">
+  <div class="d-flex">
     <figure><img src="https://upload.wikimedia.org/wikipedia/it/f/f5/Logo_Serie_A_TIM_2019.png" alt="Serie A" /></figure>
     <h1>Serie A 2020/21</h1>
   </div>
+  <form method="GET" action="">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" name="search" placeholder="Nome squadra" aria-label="Nome squadra" aria-describedby="button-addon2" value="<?= $search ?>">
+      <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Cerca</button>
+  </form>
+  </div>
+
 </header>
 
 <section>

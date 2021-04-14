@@ -31,11 +31,14 @@ class Database
     self::$db = $this;
   }
 
-  public function getTeams()
+  public function getTeams($search)
   {
-    $query = 'SELECT * FROM teams ORDER BY points DESC, goal_diff DESC, name DESC';
+    $query = 'SELECT * FROM teams ';
+    if ($search) $query .= 'WHERE name LIKE :search ';
+    $query .= 'ORDER BY points DESC, goal_diff DESC, name DESC';
 
     $statement = $this->pdo->prepare($query);
+    if ($search) $statement->bindValue('search', "%$search%");
 
     try {
       $statement->execute();
