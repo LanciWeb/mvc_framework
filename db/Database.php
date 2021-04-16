@@ -110,4 +110,19 @@ class Database
       exit;
     }
   }
+
+  public function deleteTeam($id)
+  {
+    $statement = $this->pdo->prepare('DELETE FROM teams WHERE id = :id');
+
+    $statement->bindValue('id', $id);
+    try {
+      $statement->execute();
+    } catch (Exception $e) {
+      echo '<pre>';
+      var_dump($e->getMessage());
+      echo '</pre>';
+      exit;
+    }
+  }
 }

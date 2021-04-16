@@ -54,7 +54,11 @@
               <td><?= $teams[$i]['city'] ?></td>
               <td>
                 <div class="d-flex justify-content-end">
-                  <a href="/teams/update?id=<?= $teams[$i]['id'] ?>" class="btn btn-primary">Modifica</a>
+                  <a href="/teams/update?id=<?= $teams[$i]['id'] ?>" class="btn btn-primary me-3">Modifica</a>
+                  <form method="POST" action="/teams/delete">
+                    <input type="hidden" value="<?= $teams[$i]['id'] ?>" name="id" />
+                    <button type="submit" class="btn btn-danger">Elimina</button>
+                  </form>
                 </div>
               </td>
             </tr>

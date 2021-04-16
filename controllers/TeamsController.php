@@ -71,5 +71,10 @@ class TeamsController
 
   public function delete(Router $router)
   {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !$_POST['id']) $router->renderView('404');
+
+    $router->db->deleteTeam($_POST['id']);
+
+    header('Location: /teams?success=eliminata');
   }
 }
