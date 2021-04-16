@@ -55,12 +55,13 @@ class Database
 
   public function createTeam(Team $team)
   {
-    $statement = $this->pdo->prepare('INSERT INTO teams (name, city, points, goal_diff) VALUES (:name, :city, :points, :goal_diff)');
+    $statement = $this->pdo->prepare('INSERT INTO teams (name, city, points, goal_diff, logo) VALUES (:name, :city, :points, :goal_diff, :logo)');
 
     $statement->bindValue('name', $team->name);
     $statement->bindValue('city', $team->city);
     $statement->bindValue('points', $team->points);
     $statement->bindValue('goal_diff', $team->goal_diff);
+    $statement->bindValue('logo', $team->logo);
 
     try {
       $statement->execute();
@@ -92,7 +93,9 @@ class Database
 
   public function updateTeam(Team $team)
   {
-    $query = 'UPDATE teams SET name=:name, city=:city, points=:points, goal_diff=:goal_diff WHERE id=:id';
+    $query = 'UPDATE teams SET name=:name, city=:city, points=:points, goal_diff=:goal_diff';
+    if ($team->logo) $query .= ', logo=:logo';
+    $query .= ' WHERE id=:id';
 
     $statement = $this->pdo->prepare($query);
     $statement->bindValue('id', $team->id);
@@ -100,6 +103,7 @@ class Database
     $statement->bindValue('city', $team->city);
     $statement->bindValue('points', $team->points);
     $statement->bindValue('goal_diff', $team->goal_diff);
+    if ($team->logo) $statement->bindValue('logo', $team->logo);
 
     try {
       $statement->execute();

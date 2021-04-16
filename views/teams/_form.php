@@ -1,4 +1,12 @@
-<form action="" method="POST" class="needs-validation" novalidate>
+<form action="" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
+  <?php if ($team->logo) : ?>
+    <img src="/<?= $team->logo ?>" alt="<?= $team->name ?>" />
+  <?php endif; ?>
+  <div class="input-group mb-3 mt-2">
+    <label class="input-group-text" for="logo">Scudetto</label>
+    <input type="file" class="form-control" id="logo" name="logo">
+  </div>
+
   <div class="mb-3 has-validation">
     <label for="name" class="form-label">Nome squadra</label>
     <input type="text" class="form-control <?php if ($errors['name']) echo 'is-invalid' ?>" id="name" name="name" required value="<?= $team->name ?>">

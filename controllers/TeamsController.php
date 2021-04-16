@@ -30,6 +30,7 @@ class TeamsController
       $data['city'] = $city;
       $data['points'] = $points;
       $data['goal_diff'] = $goal_diff;
+      $data['imageFile'] = $_FILES['logo'];
 
       $team = new Team();
       $team->load($data);
@@ -58,6 +59,7 @@ class TeamsController
       }
 
       $data['id'] = $id;
+      $data['imageFile'] = $_FILES['logo'];
       $team = new Team();
       $team->load($data);
       $errors = $team->save();
